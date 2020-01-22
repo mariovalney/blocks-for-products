@@ -1,0 +1,28 @@
+.bcp-postbox {
+    margin-top: 20px;
+    margin-bottom: 0;
+
+    & > h2 {
+        border-bottom: 1px solid #CCD0D4;
+    }
+
+    .inside {
+        margin-top: 0 !important;
+        padding: 12px;
+
+        .button-link {
+            margin: 14px 0 0 10px;
+            display: inline-block;
+        }
+
+        & > p:first-child {
+            margin-top: 0;
+        }
+    }
+}
+
+.bcp-after-editor {
+    display: block;
+    margin: 10px 0 0;
+    text-align: right;
+}

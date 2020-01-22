@@ -1,0 +1,33 @@
+{
+  "name": "blocks-for-products",
+  "version": "1.0.0",
+  "description": "A plugin to add support for Gutenberg on product pages.",
+  "author": "Mário Valney",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Vizir/blocks-for-products"
+  },
+  "keywords": [
+    "WooCommerce",
+    "WordPress"
+  ],
+  "license": "GPLv2 or later",
+  "homepage": "https://github.com/Vizir/blocks-for-products",
+  "browserslist": [
+    "last 2 versions"
+  ],
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^6.1.0",
+    "gulp-rename": "^1.4.0",
+    "gulp-uglify-es": "^1.0.4",
+    "gulp-clean-css": "^4.2.0"
+  },
+  "dependencies": {
+    "gulp-sass": "^4.0.2",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-zip": "^5.0.1"
+  }
+}
