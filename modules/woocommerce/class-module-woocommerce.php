@@ -56,6 +56,22 @@ if ( ! class_exists( 'BFP_Module_Woocommerce' ) ) {
             $this->core->add_action( 'load-post-new.php', [ $this, 'edit_page_init' ] );
             $this->core->add_action( 'edit_form_after_title', [ $this, 'edit_form_after_title' ] );
             $this->core->add_action( 'edit_form_after_editor', [ $this, 'edit_form_after_editor' ] );
+            $this->core->add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ), 99 );
+        }
+
+        /**
+         * Filter: 'use_block_editor_for_post_type'
+         * Activate Gutenberg for products post type.
+         *
+         * Note: we use 99 as priority to try to override themes and other plugins,
+         * as we are creating a new interace to work with blocks on product pages.
+         */
+        public function use_block_editor_for_post_type( $can_edit, $post_type ) {
+            if ( $post_type !== self::PRODUCT_POST_TYPE ) {
+                return $can_edit;
+            }
+
+            return is_admin() && $this->is_using_blocks();
         }
 
         /**
@@ -105,21 +121,6 @@ if ( ! class_exists( 'BFP_Module_Woocommerce' ) ) {
         }
 
         /**
-         * Filter: 'use_block_editor_for_post_type'
-         * Activate Gutenberg for products post type.
-         *
-         * Note: we use 99 as priority to try to override themes and other plugins,
-         * as we are creating a new interace to work with blocks on product pages.
-         */
-        public function use_block_editor_for_post_type( $can_edit, $post_type ) {
-            if ( $post_type !== self::PRODUCT_POST_TYPE ) {
-                return $can_edit;
-            }
-
-            return is_admin() && $this->is_using_blocks();
-        }
-
-        /**
          * Action: 'edit_form_after_title'
          * Render button to edit post with blocks and remove editor support
          */
@@ -154,6 +155,39 @@ if ( ! class_exists( 'BFP_Module_Woocommerce' ) ) {
             }
 
             add_post_type_support( self::PRODUCT_POST_TYPE, 'editor' );
+        }
+
+        /**
+         * Action: 'add_meta_boxes'
+         * Remove WooCommerce metabox from blocks settings compatibility flags
+         *
+         * @link https://make.wordpress.org/core/2018/11/07/meta-box-compatibility-flags
+         */
+        public function add_meta_boxes() {
+            global $wp_meta_boxes;
+
+            $normal_meta_boxes = $wp_meta_boxes['product'] ?? [];
+            $normal_meta_boxes = $normal_meta_boxes['normal'] ?? [];
+
+            $wc_metaboxes = [ 'woocommerce-product-data', 'postexcerpt' ];
+
+            foreach ( $normal_meta_boxes as $priority => $meta_boxes ) {
+                foreach ( $meta_boxes as $id => $meta_box ) {
+                    if ( ! in_array( $id, $wc_metaboxes, true ) ) {
+                        continue;
+                    }
+
+                    $meta_box['args'] = $meta_box['args'] ?? [];
+
+                    if ( ! empty( $meta_box['args']['__block_editor_compatible_meta_box'] ) || ! ( $meta_box['args']['__back_compat_meta_box'] ?? true ) ) {
+                        continue;
+                    }
+
+                    $meta_box['args']['__back_compat_meta_box'] = true;
+
+                    $wp_meta_boxes['product']['normal'][ $priority ][ $id ] = $meta_box;
+                }
+            }
         }
 
         /**
