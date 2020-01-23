@@ -133,14 +133,17 @@ if ( ! class_exists( 'BFP_Module_Woocommerce' ) ) {
 
             if ( ! empty( $_GET['remove-blocks'] ) && wp_verify_nonce( $nonce, 'bcp-remove-blocks' ) ) {
                 update_post_meta( $post->ID, self::META_KEY_CLASSIC_EDITOR, '1' );
+
+                wp_redirect( remove_query_arg( [ 'remove-blocks', 'blocks', '_wpnonce' ], false ), 302 );
+                exit;
             }
 
             if ( ! empty( $_GET['use-blocks'] ) && wp_verify_nonce( $nonce, 'bcp-use-blocks' ) ) {
                 delete_post_meta( $post->ID, self::META_KEY_CLASSIC_EDITOR );
-            }
 
-            wp_redirect( remove_query_arg( [ 'use-blocks', 'remove-blocks', 'blocks', '_wpnonce' ], false ), 302 );
-            exit;
+                wp_redirect( remove_query_arg( [ 'use-blocks', 'blocks', '_wpnonce' ], false ), 302 );
+                exit;
+            }
         }
 
         /**
