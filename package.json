@@ -3,8 +3,12 @@
   "version": "1.0.0",
   "description": "A plugin to add support for Gutenberg on product pages.",
   "author": "Mário Valney",
-  "main": "index.js",
-  "scripts": {},
+  "main": "modules/woocommerce/assets/js/block-editor.js",
+  "scripts": {
+    "start": "wp-scripts start modules/woocommerce/assets/js/block-editor.js",
+    "build": "wp-scripts build modules/woocommerce/assets/js/block-editor.js",
+    "publish": "npm run build && gulp"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/Vizir/blocks-for-products"
@@ -18,16 +22,19 @@
   "browserslist": [
     "last 2 versions"
   ],
+  "dependencies": {},
   "devDependencies": {
+    "@wordpress/blocks": "^6.10.0",
+    "@wordpress/components": "^8.5.0",
+    "@wordpress/plugins": "^2.10.0",
+    "@wordpress/scripts": "^6.2.0",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^6.1.0",
+    "gulp-clean-css": "^4.2.0",
     "gulp-rename": "^1.4.0",
-    "gulp-uglify-es": "^1.0.4",
-    "gulp-clean-css": "^4.2.0"
-  },
-  "dependencies": {
     "gulp-sass": "^4.0.2",
     "gulp-sourcemaps": "^2.6.5",
+    "gulp-uglify-es": "^1.0.4",
     "gulp-zip": "^5.0.1"
   }
 }
