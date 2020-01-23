@@ -73,15 +73,13 @@ if ( ! class_exists( 'BFP_Module_Woocommerce' ) ) {
                 return $can_edit;
             }
 
-            if ( ! empty( $_GET['post'] ) ) {
-                $post = get_post( sanitize_text_field( $_GET['post'] ) );
-
-                if ( $this->edit_post_with_classic_editor( $post ) ) {
-                    return false;
-                }
+            if ( empty( $_GET['post'] ) ) {
+                return false;
             }
 
-            return is_admin() && $this->is_using_blocks();
+            $post = get_post( sanitize_text_field( $_GET['post'] ) );
+
+            return $this->is_using_blocks() && ! $this->edit_post_with_classic_editor( $post );
         }
 
         /**
@@ -230,6 +228,10 @@ if ( ! class_exists( 'BFP_Module_Woocommerce' ) ) {
          * @return boolean
          */
         private function edit_post_with_classic_editor( $post ) {
+            if ( empty( $post ) || empty( $post->ID ) ) {
+                return false;
+            }
+
             return get_post_meta( $post->ID, self::META_KEY_CLASSIC_EDITOR, true ) === '1';
         }
 
