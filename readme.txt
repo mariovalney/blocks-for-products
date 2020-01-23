@@ -1,7 +1,7 @@
-=== Blocks for (WooCommerce) Products ===
+=== Blocks for Products ===
 Contributors: mariovalney, vizir
 Donate link: https://github.com/Vizir/blocks-for-products
-Tags: woocommerce, gutenberg, vizir, mariovalney
+Tags: woocommerce, gutenberg, products, vizir, mariovalney
 Requires at least: 4.7
 Tested up to: 5.3
 Requires PHP: 7.0

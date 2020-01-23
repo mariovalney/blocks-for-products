@@ -119,7 +119,7 @@ if ( ! class_exists( 'BFP_Module_Dependence' ) ) {
 
             return sprintf(
                 /* translators: %1$s is the plugin name and %2%s is the action of click. */
-                __( '<strong>Blocks for (WooCommerce) Products</strong> depends of %1$s to work. Click to %2$s.', BFP_TEXTDOMAIN ),
+                __( '<strong>Blocks for Products</strong> depends of %1$s to work. Click to %2$s.', BFP_TEXTDOMAIN ),
                 $plugin->name,
                 '<a href="' . esc_url( $url ) . '">' . __( 'install the plugin', BFP_TEXTDOMAIN ) . '</a>'
             );
@@ -139,7 +139,7 @@ if ( ! class_exists( 'BFP_Module_Dependence' ) ) {
 
             return sprintf(
                 /* translators: %1$s is the plugin name and %2%s is the action of click. */
-                __( '<strong>Blocks for (WooCommerce) Products</strong> depends of %1$s to work. Click to %2$s.', BFP_TEXTDOMAIN ),
+                __( '<strong>Blocks for Products</strong> depends of %1$s to work. Click to %2$s.', BFP_TEXTDOMAIN ),
                 $plugin->name,
                 '<a href="' . esc_url( $url ) . '">' . __( 'activate the plugin', BFP_TEXTDOMAIN ) . '</a>'
             );

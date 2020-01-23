@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Plugin Name:     Blocks for (WooCommerce) Products
+ * Plugin Name:     Blocks for Products
  * Plugin URI:      https://github.com/Vizir/blocks-for-products
  * Description:     A plugin to add support for Gutenberg on product pages.
  * Version:         1.0.0
