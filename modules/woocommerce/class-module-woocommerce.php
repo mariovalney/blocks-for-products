@@ -222,7 +222,11 @@ if ( ! class_exists( 'BFP_Module_Woocommerce' ) ) {
          * @return boolean
          */
         private function is_using_blocks() {
-            return $_GET['blocks'] ?? false;
+            if ( empty( $_GET['blocks'] ) ) {
+                return false;
+            }
+
+            return sanitize_text_field( $_GET['blocks'] ) === '1';
         }
 
         /**
