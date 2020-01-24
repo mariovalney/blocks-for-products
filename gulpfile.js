@@ -16,8 +16,8 @@ var dir_assets = 'modules/*/assets/';
  */
 function styles() {
     const rename_style = (path) => {
-        path.dirname = path.dirname.replace( '\/scss', '\/css' );
-        path.extname = '.min.css';
+        path.dirname   = path.dirname.replace( '\/scss', '\/css' );
+        path.extname   = '.min.css';
     };
 
     return gulp.src( dir_assets + 'scss/*.scss' )

@@ -39,7 +39,7 @@ if ( ! class_exists( 'BFP_Module_Woocommerce' ) ) {
                 $module->add_dependence_notice( $notice );
             }
 
-            $this->includes = [];
+            $this->includes = array();
         }
 
         /**
@@ -49,15 +49,15 @@ if ( ! class_exists( 'BFP_Module_Woocommerce' ) ) {
          * @param    Blocks_For_Products      $core   The Core object
          */
         public function define_hooks() {
-            $this->core->add_filter( 'use_block_editor_for_post_type', [ $this, 'use_block_editor_for_post_type' ], 99, 2 );
+            $this->core->add_filter( 'use_block_editor_for_post_type', array( $this, 'use_block_editor_for_post_type' ), 99, 2 );
 
             $this->core->add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
             $this->core->add_action( 'enqueue_block_editor_assets', array( $this, 'enqueue_block_editor_assets' ) );
 
-            $this->core->add_action( 'load-post.php', [ $this, 'edit_page_init' ] );
-            $this->core->add_action( 'load-post-new.php', [ $this, 'edit_page_init' ] );
-            $this->core->add_action( 'edit_form_after_title', [ $this, 'edit_form_after_title' ] );
-            $this->core->add_action( 'edit_form_after_editor', [ $this, 'edit_form_after_editor' ] );
+            $this->core->add_action( 'load-post.php', array( $this, 'edit_page_init' ) );
+            $this->core->add_action( 'load-post-new.php', array( $this, 'edit_page_init' ) );
+            $this->core->add_action( 'edit_form_after_title', array( $this, 'edit_form_after_title' ) );
+            $this->core->add_action( 'edit_form_after_editor', array( $this, 'edit_form_after_editor' ) );
             $this->core->add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ), 99 );
         }
 
@@ -89,7 +89,7 @@ if ( ! class_exists( 'BFP_Module_Woocommerce' ) ) {
         public function admin_enqueue_scripts( $page ) {
             global $post;
 
-            if ( ! in_array( $page, [ 'post.php', 'post-new.php' ], true ) ) {
+            if ( ! in_array( $page, array( 'post.php', 'post-new.php' ), true ) ) {
                 return;
             }
 
@@ -97,7 +97,7 @@ if ( ! class_exists( 'BFP_Module_Woocommerce' ) ) {
                 return;
             }
 
-            wp_enqueue_style( 'bfp-edit-content-style', BFP_PLUGIN_URL . '/modules/woocommerce/assets/css/edit-content.min.css' );
+            wp_enqueue_style( 'bfp-edit-content-style', BFP_PLUGIN_URL . '/modules/woocommerce/assets/css/edit-content.min.css', array(), BFP_VERSION );
         }
 
         /**
@@ -111,20 +111,22 @@ if ( ! class_exists( 'BFP_Module_Woocommerce' ) ) {
                 return;
             }
 
-            $asset_file = include( BFP_PLUGIN_PATH . '/build/block-editor.asset.php' );
-            wp_enqueue_script( 'bfp-block-editor-script', BFP_PLUGIN_URL . '/build/block-editor.min.js', $asset_file['dependencies'], $asset_file['version'] );
+            $asset_file = include BFP_PLUGIN_PATH . '/build/block-editor.asset.php';
+            wp_enqueue_script( 'bfp-block-editor-script', BFP_PLUGIN_URL . '/build/block-editor.min.js', $asset_file['dependencies'], $asset_file['version'], true );
         }
 
         /**
          * Action: 'load-post.php'
          * Do stuff on admin pages
+         *
+         * @SuppressWarnings(PHPMD.ExitExpression)
          */
         public function edit_page_init() {
             if ( empty( $_GET['post'] ) || empty( $_GET['_wpnonce'] ) ) {
                 return;
             }
 
-            $post = get_post( sanitize_text_field( $_GET['post'] ) );
+            $post  = get_post( sanitize_text_field( $_GET['post'] ) );
             $nonce = sanitize_text_field( $_GET['_wpnonce'] );
 
             if ( empty( $post ) || $post->post_type !== self::PRODUCT_POST_TYPE ) {
@@ -134,14 +136,14 @@ if ( ! class_exists( 'BFP_Module_Woocommerce' ) ) {
             if ( ! empty( $_GET['remove-blocks'] ) && wp_verify_nonce( $nonce, 'bcp-remove-blocks' ) ) {
                 update_post_meta( $post->ID, self::META_KEY_CLASSIC_EDITOR, '1' );
 
-                wp_redirect( remove_query_arg( [ 'remove-blocks', 'blocks', '_wpnonce' ], false ), 302 );
+                wp_redirect( remove_query_arg( array( 'remove-blocks', 'blocks', '_wpnonce' ), false ), 302 );
                 exit;
             }
 
             if ( ! empty( $_GET['use-blocks'] ) && wp_verify_nonce( $nonce, 'bcp-use-blocks' ) ) {
                 delete_post_meta( $post->ID, self::META_KEY_CLASSIC_EDITOR );
 
-                wp_redirect( remove_query_arg( [ 'use-blocks', 'blocks', '_wpnonce' ], false ), 302 );
+                wp_redirect( remove_query_arg( array( 'use-blocks', 'blocks', '_wpnonce' ), false ), 302 );
                 exit;
             }
         }
@@ -158,7 +160,7 @@ if ( ! class_exists( 'BFP_Module_Woocommerce' ) ) {
             remove_post_type_support( self::PRODUCT_POST_TYPE, 'editor' );
 
             $screen = get_current_screen();
-            if ($screen->action === 'add') {
+            if ( $screen->action === 'add' ) {
                 require BFP_PLUGIN_PATH . '/modules/woocommerce/views/new-editor.php';
                 return;
             }
@@ -192,10 +194,10 @@ if ( ! class_exists( 'BFP_Module_Woocommerce' ) ) {
         public function add_meta_boxes() {
             global $wp_meta_boxes;
 
-            $normal_meta_boxes = $wp_meta_boxes['product'] ?? [];
-            $normal_meta_boxes = $normal_meta_boxes['normal'] ?? [];
+            $normal_meta_boxes = $wp_meta_boxes['product'] ?? array();
+            $normal_meta_boxes = $normal_meta_boxes['normal'] ?? array();
 
-            $wc_metaboxes = [ 'woocommerce-product-data', 'postexcerpt' ];
+            $wc_metaboxes = array( 'woocommerce-product-data', 'postexcerpt' );
 
             foreach ( $normal_meta_boxes as $priority => $meta_boxes ) {
                 foreach ( $meta_boxes as $id => $meta_box ) {
@@ -203,7 +205,7 @@ if ( ! class_exists( 'BFP_Module_Woocommerce' ) ) {
                         continue;
                     }
 
-                    $meta_box['args'] = $meta_box['args'] ?? [];
+                    $meta_box['args'] = $meta_box['args'] ?? array();
 
                     if ( ! empty( $meta_box['args']['__block_editor_compatible_meta_box'] ) || ! ( $meta_box['args']['__back_compat_meta_box'] ?? true ) ) {
                         continue;
@@ -211,7 +213,7 @@ if ( ! class_exists( 'BFP_Module_Woocommerce' ) ) {
 
                     $meta_box['args']['__back_compat_meta_box'] = true;
 
-                    $wp_meta_boxes['product']['normal'][ $priority ][ $id ] = $meta_box;
+                    $wp_meta_boxes['product']['normal'][ $priority ][ $id ] = $meta_box; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
                 }
             }
         }

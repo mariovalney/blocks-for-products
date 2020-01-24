@@ -21,13 +21,13 @@ if ( ! class_exists( 'BFP_Module_Dependence' ) ) {
          * List of dependencies to check
          * @var array
          */
-        private $dependencies = [];
+        private $dependencies = array();
 
         /**
          * List of notices to show
          * @var array
          */
-        private $notices = [];
+        private $notices = array();
 
         /**
          * Define Hooks Run
@@ -77,11 +77,11 @@ if ( ! class_exists( 'BFP_Module_Dependence' ) ) {
          * @param string $plugin_slug The plugin slug (from repository)
          */
         public function add_dependence( $plugin_file, $plugin_name, $plugin_slug ) {
-            $this->dependencies[] = (object) [
+            $this->dependencies[] = (object) array(
                 'file' => $plugin_file,
                 'name' => $plugin_name,
                 'slug' => $plugin_slug,
-            ];
+            );
         }
 
         /**
@@ -91,7 +91,7 @@ if ( ! class_exists( 'BFP_Module_Dependence' ) ) {
          * @param string $class  The HTML notice-$class
          */
         public function add_dependence_notice( $notice, $class = 'error' ) {
-            $this->notices[] = [ $notice, $class ];
+            $this->notices[] = array( $notice, $class );
         }
 
         /**

@@ -29,6 +29,7 @@
         </properties>
 
         <exclude-pattern>modules/woocommerce/views/*</exclude-pattern>
+        <exclude-pattern>modules/woocommerce/assets/*</exclude-pattern>
     </rule>
 
     <!-- Ignoring FunctionCallSignature to keep jQuery events more readable -->

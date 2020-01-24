@@ -7,7 +7,7 @@ import { addQueryArgs, removeQueryArgs } from '@wordpress/url';
 registerPlugin( 'bfp-more-menu-item', {
     icon: 'arrow-left-alt',
     render: () => {
-        window.history.replaceState('', '', addQueryArgs( window.location.href, { blocks: '1' } ));
+        window.history.replaceState( '', '', addQueryArgs( window.location.href, { blocks: '1' } ) );
 
         return(
             <PluginMoreMenuItem
