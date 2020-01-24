@@ -29,7 +29,6 @@
         </properties>
 
         <exclude-pattern>modules/woocommerce/views/*</exclude-pattern>
-        <exclude-pattern>modules/woocommerce/assets/*</exclude-pattern>
     </rule>
 
     <!-- Ignoring FunctionCallSignature to keep jQuery events more readable -->
@@ -44,6 +43,9 @@
     <rule ref="PEAR.Functions.FunctionCallSignature.MultipleArguments">
         <exclude-pattern>*.js</exclude-pattern>
     </rule>
+
+    <!-- Excluding blocks -->
+    <exclude-pattern>modules/woocommerce/assets/*.js</exclude-pattern>
 
     <!-- Excluding git, min and vendors -->
     <exclude-pattern>\.git/*</exclude-pattern>
