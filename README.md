@@ -85,6 +85,10 @@ Yes! Visit [GitHub repository](https://github.com/Vizir/blocks-for-products).
 
 ## Changelog ##
 
+### 1.1 ###
+
+* Support to all product types
+
 ### 1.0 ###
 
 * It's alive!

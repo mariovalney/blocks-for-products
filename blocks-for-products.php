@@ -4,7 +4,7 @@
  * Plugin Name:     Blocks for Products
  * Plugin URI:      https://github.com/Vizir/blocks-for-products
  * Description:     A plugin to add support for Gutenberg on product pages.
- * Version:         1.0.0
+ * Version:         1.1.0
  * License:         GPLv2 or later
  * Author:          Vizir Software Studio, Mário Valney
  * Author URI:      http://vizir.com.br/en
@@ -265,7 +265,7 @@ if ( ! class_exists( 'Blocks_For_Products' ) ) {
          */
         public function run() {
             // Definitions to plugin
-            define( 'BFP_VERSION', '1.0.0' );
+            define( 'BFP_VERSION', '1.1.0' );
             define( 'BFP_PLUGIN_FILE', __FILE__ );
             define( 'BFP_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
             define( 'BFP_PLUGIN_PATH', WP_PLUGIN_DIR . '/' . dirname( BFP_PLUGIN_BASENAME ) );
