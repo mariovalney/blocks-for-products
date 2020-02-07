@@ -26,3 +26,12 @@
     margin: 10px 0 0;
     text-align: right;
 }
+
+body.block-editor-page {
+    .edit-post-layout__metaboxes {
+        #postexcerpt,
+        #woocommerce-product-data {
+            display: none !important;
+        }
+    }
+}

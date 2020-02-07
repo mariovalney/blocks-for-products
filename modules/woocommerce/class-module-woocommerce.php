@@ -58,7 +58,6 @@ if ( ! class_exists( 'BFP_Module_Woocommerce' ) ) {
             $this->core->add_action( 'load-post-new.php', array( $this, 'edit_page_init' ) );
             $this->core->add_action( 'edit_form_after_title', array( $this, 'edit_form_after_title' ) );
             $this->core->add_action( 'edit_form_after_editor', array( $this, 'edit_form_after_editor' ) );
-            $this->core->add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ), 99 );
         }
 
         /**
@@ -183,39 +182,6 @@ if ( ! class_exists( 'BFP_Module_Woocommerce' ) ) {
             }
 
             add_post_type_support( self::PRODUCT_POST_TYPE, 'editor' );
-        }
-
-        /**
-         * Action: 'add_meta_boxes'
-         * Remove WooCommerce metabox from blocks settings compatibility flags
-         *
-         * @link https://make.wordpress.org/core/2018/11/07/meta-box-compatibility-flags
-         */
-        public function add_meta_boxes() {
-            global $wp_meta_boxes;
-
-            $normal_meta_boxes = $wp_meta_boxes['product'] ?? array();
-            $normal_meta_boxes = $normal_meta_boxes['normal'] ?? array();
-
-            $wc_metaboxes = array( 'woocommerce-product-data', 'postexcerpt' );
-
-            foreach ( $normal_meta_boxes as $priority => $meta_boxes ) {
-                foreach ( $meta_boxes as $id => $meta_box ) {
-                    if ( ! in_array( $id, $wc_metaboxes, true ) ) {
-                        continue;
-                    }
-
-                    $meta_box['args'] = $meta_box['args'] ?? array();
-
-                    if ( ! empty( $meta_box['args']['__block_editor_compatible_meta_box'] ) || ! ( $meta_box['args']['__back_compat_meta_box'] ?? true ) ) {
-                        continue;
-                    }
-
-                    $meta_box['args']['__back_compat_meta_box'] = true;
-
-                    $wp_meta_boxes['product']['normal'][ $priority ][ $id ] = $meta_box; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
-                }
-            }
         }
 
         /**
