@@ -293,22 +293,19 @@ if ( ! class_exists( 'Blocks_For_Products' ) ) {
                         }
                     }
                 }
+            }
 
-                // Define Hooks: after include everything
-                if ( method_exists( $module, 'define_hooks' ) ) {
-                    $module->define_hooks();
-                }
-
-                // After Run Method: last method
+            // After Run for everyone
+            foreach ( $this->modules as $module_slug => $module ) {
                 if ( method_exists( $module, 'after_run' ) ) {
                     $module->after_run();
                 }
             }
 
-            // After Running Modules
+            // Define Hooks for everyone
             foreach ( $this->modules as $module_slug => $module ) {
-                if ( method_exists( $module, 'after_run' ) ) {
-                    $module->after_run();
+                if ( method_exists( $module, 'define_hooks' ) ) {
+                    $module->define_hooks();
                 }
             }
 
