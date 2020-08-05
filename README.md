@@ -3,7 +3,7 @@
 **Donate link:** https://github.com/Vizir/blocks-for-products  
 **Tags:** woocommerce, gutenberg, products, vizir, mariovalney  
 **Requires at least:** 4.7  
-**Tested up to:** 5.3  
+**Tested up to:** 5.5  
 **Requires PHP:** 7.0  
 **Stable tag:** trunk  
 **License:** GPLv2 or later  
