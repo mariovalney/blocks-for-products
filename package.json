@@ -24,17 +24,17 @@
   ],
   "dependencies": {},
   "devDependencies": {
-    "@wordpress/blocks": "^6.10.0",
+    "@wordpress/blocks": "^6.25.2",
     "@wordpress/components": "^8.5.0",
-    "@wordpress/plugins": "^2.10.0",
+    "@wordpress/plugins": "^2.25.0",
     "@wordpress/scripts": "^6.2.0",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^6.1.0",
-    "gulp-clean-css": "^4.2.0",
+    "gulp-clean-css": "^4.3.0",
     "gulp-rename": "^1.4.0",
-    "gulp-sass": "^4.0.2",
+    "gulp-sass": "^4.1.0",
     "gulp-sourcemaps": "^2.6.5",
     "gulp-uglify-es": "^1.0.4",
-    "gulp-zip": "^5.0.1"
+    "gulp-zip": "^5.1.0"
   }
 }
