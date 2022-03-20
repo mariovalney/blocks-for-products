@@ -22,7 +22,6 @@
   "browserslist": [
     "last 2 versions"
   ],
-  "dependencies": {},
   "devDependencies": {
     "@wordpress/blocks": "^6.25.2",
     "@wordpress/components": "^8.5.0",
